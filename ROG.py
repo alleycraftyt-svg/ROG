@@ -154,11 +154,14 @@ while True:
 
     # Command: FRM (Farm)
     if cmd == 'frm':
-        print(f'You find a slime, kill it, and earn {gp} gold and {xp1} xp!')
-        xp += xp1
-        gp = random.randint(1, 25)
-        money += gp
-        mana -= 2
+        if mana <= 0:
+            print("You don't have enough mana to fight! Use a potion.")
+        else:
+            print(f'You find a slime, kill it, and earn {gp} gold and {xp1} xp!')
+            xp += xp1
+            gp = random.randint(1, 25)
+            money += gp
+            mana -= 2
 
     # Command: HELP 1
     if cmd == 'help':
