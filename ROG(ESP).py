@@ -3,44 +3,44 @@ import os
 import time
 import random
 
-# Nombre del archivo para guardar la partida en el ordenador
-ARCHIVO_GUARDADO = "save_rog.json"
+# Nombre del archivo para guardar la partida en la computadora
+SAVE_FILE = "partida_rog.json"
 
 # --- FUNCIONES DE GUARDADO Y CARGA ---
 
-def guardar_partida(nombre, xp, money, lv, xp1, mana, potion):
-    datos = {
-        "nombre": nombre, "xp": xp, "money": money, 
+def save_game(name, xp, money, lv, xp1, mana, potion):
+    data = {
+        "name": name, "xp": xp, "money": money, 
         "lv": lv, "xp1": xp1, "mana": mana, "potion": potion
     }
-    with open(ARCHIVO_GUARDADO, "w") as archivo:
-        json.dump(datos, archivo, indent=4)
-    print("¡Partida guardada correctamente!")
+    with open(SAVE_FILE, "w") as file:
+        json.dump(data, file, indent=4)
+    print("¡Partida guardada con éxito!")
 
-def cargar_partida():
-    if os.path.exists(ARCHIVO_GUARDADO):
-        with open(ARCHIVO_GUARDADO, "r") as archivo:
-            datos = json.load(archivo)
-            print(f"\n¡Partida cargada! Bienvenido de nuevo, {datos['nombre']}.")
-            return (datos["nombre"], datos["xp"], datos["money"], 
-                    datos["lv"], datos["xp1"], datos["mana"], datos["potion"])
+def load_game():
+    if os.path.exists(SAVE_FILE):
+        with open(SAVE_FILE, "r") as file:
+            data = json.load(file)
+            print(f"\n¡Partida cargada! Bienvenido de nuevo, {data['name']}.")
+            return (data["name"], data["xp"], data["money"], 
+                    data["lv"], data["xp1"], data["mana"], data["potion"])
     else:
-        print('Bienvenido a Realm Of Gorthia!!!')
-        nombre = input('Como te llamas? ')
-        print(f'¡Bienvenido, {nombre}!')
-        return nombre, 0, 0, 1, 10, 10, 0
+        print('¡¡¡Bienvenido a Realm Of Gorthia!!!')
+        name = input('¿Cuál es tu nombre? ')
+        print(f'¡Bienvenido, {name}!')
+        return name, 0, 0, 1, 10, 10, 0
 
 # --- INICIO DEL JUEGO ---
 
-name, xp, money, lv, xp1, mana, potion = cargar_partida()
+name, xp, money, lv, xp1, mana, potion = load_game()
 
-print('\nEscribe "kill" para matar mobs, "xp" para ver tu xp, "store" para la tienda y ¨src¨ para obtener el link de github del codigo fuente,')
-print('usa help para ver los comandos adicionales.')
+print('\nEscribe "kill" para luchar contra monstruos, "xp" para ver tu estado, "store" para ir a la tienda y "src" para obtener el enlace del código fuente en GitHub.')
+print('Usa "help" para ver comandos adicionales.')
 print('--------------------------------------------------------')
 print()
 print(' Realm Of Gorthia (Demo 0.1.0) ')
 print()
-print('  BY: All3y_Sl4yer     ')
+print('  POR: All3y_Sl4yer     ')
 print()
 print('--------------------------------------------------------')
 
@@ -54,13 +54,13 @@ while True:
     # Comando: KILL
     if cmd == 'kill':
         if mana <= 0:
-            print("¡No tienes suficiente mana para pelear! Usa una poción.")
+            print("¡No tienes suficiente maná para luchar! Usa una poción.")
         else:
-            yn = input('Un slime se acerca a ti, ¿lo matas? (S/N): ').strip().lower()
+            yn = input('Un slime se te acerca, ¿lo matas? (S/N): ').strip().lower()
 
-    if yn == 's':
-        print(f'¡Has ganado {xp1} de xp y {gp} de oro!')
-        print(f'Te queda {mana} de mana.')
+    if yn == 's' or yn == 'y': 
+        print(f'¡Ganaste {xp1} de xp y {gp} monedas de oro!')
+        print(f'Te quedan {mana} de maná.')
         xp += xp1
         gp = random.randint(1, 40)
         money += gp
@@ -69,13 +69,13 @@ while True:
     if yn == 'n':
         print('Escapas del slime.')
 
-    # Comando: STORE (Tienda)
+    # Comando: STORE
     if cmd == 'store':
         print(f'Tu oro actual: {money}$')
         print('A: Espada lv 10 (100$)')
-        print('B: Pocion de mana (20$)')
-        print('C: Pocion de mana x10 (200$)')
-        store = input('¿Qué vas a comprar? (A/B) o ENTER para salir: ').strip().lower()
+        print('B: Poción de maná (20$)')
+        print('C: Poción de maná x10 (200$)')
+        store = input('¿Qué vas a comprar? (A/B/C) o presiona ENTER para salir: ').strip().lower()
 
     if store == 'a':
         if money >= 100:
@@ -86,113 +86,114 @@ while True:
             print("No tienes suficiente dinero.")
 
     if store == 'b':
-        if money >= 5:
-            print('¡Compraste una poción de mana!')
+        if money >= 20: 
+            print('¡Compraste una poción de maná!')
             money -= 20
             potion += 1
         else:
             print("No tienes suficiente dinero.")
 
-
     if store == 'c':
-        if money >= 5:
-            print('¡Compraste 10 pociones de mana!')
+        if money >= 200: 
+            print('¡Compraste 10 pociones de maná!')
             money -= 200
             potion += 10
         else:
             print("No tienes suficiente dinero.")
 
-    # Sistema de nivel automático
+    # Sistema automático de nivel
     if xp >= 100:
         lv += 1
         xp = 0  
-        print(f'¡Felicidades! Has subido al nivel {lv}')
+        print(f'¡Felicidades! Subiste al nivel {lv}')
 
     # Comando: INV (Inventario)
     if cmd == 'inv':
         print(f'--- INVENTARIO ---')
-        print(f'Pociones de mana: {potion}')
+        print(f'Pociones de maná: {potion}')
         print(f'Oro: {money}$')
-        print(f'Te queda {mana} de mana.')
+        print(f'Te quedan {mana} de maná.')
         print('------------------')
         if potion > 0:
-            usar = input('Escribe "pot" para usar una poción o ENTER para cerrar: ').strip().lower()
-            if usar == 'pot':
+            use = input('Escribe "pot" para usar una poción o presiona ENTER para cerrar: ').strip().lower()
+            if use == 'pot':
                 cmd = 'pot'
-
-    
 
     # Efecto de la poción
     if cmd == 'pot':
         if potion > 0:
             mana = 10
             potion -= 1
-            print("¡Has usado una poción! Tu mana vuelve a 10.")
+            print("¡Usaste una poción! Tu maná ha vuelto a 10.")
         else:
             print("No tienes pociones.")
 
-    # Comando: PM (Mana)
+    # Comando: PM (Ver Maná)
     if cmd == 'pm':
-         print(f'Te queda {mana} de mana.')
+         print(f'Te quedan {mana} de maná.')
 
-    # Comando: XP
+    # Comando: XP (Ver Experiencia)
     if cmd == 'xp':
          print(f'Nivel: {lv} | Tu XP actual es: {xp}/100')
 
-    # Comando: GUARDAR
+    # Comando: SAVE
     if cmd == 'save':
-        guardar_partida(name, xp, money, lv, xp1, mana, potion)
+        save_game(name, xp, money, lv, xp1, mana, potion)
 
-    # Comando: REINICIAR (Corregido directamente aquí en el bucle)
+    # Comando: RESTART
     if cmd == 'restart':
-        confirmar = input('¿Seguro que quieres borrar todo tu progreso? (s/n): ').strip().lower()
-        if confirmar == 's':
-            if os.path.exists(ARCHIVO_GUARDADO):
-                os.remove(ARCHIVO_GUARDADO)
-            print("¡Progreso borrado de tu dispositivo!")
-            name = input('Como te llamas de nuevo? ')
+        confirm = input('¿Estás seguro de que deseas borrar todo tu progreso? (s/n): ').strip().lower()
+        if confirm == 's' or confirm == 'y':
+            if os.path.exists(SAVE_FILE):
+                os.remove(SAVE_FILE)
+            print("¡Progreso eliminado de tu dispositivo!")
+            name = input('¿Cuál es tu nombre esta vez? ')
             xp, money, lv, xp1, mana, potion = 0, 0, 1, 10, 10, 0
-            guardar_partida(name, xp, money, lv, xp1, mana, potion)
+            save_game(name, xp, money, lv, xp1, mana, potion)
             print('¡Nueva partida iniciada!')
 
+    # Comando: FRM (Farmear)
     if cmd == 'frm':
-        print('encuentras un slime y lo matas y ganas {gp} y {xp1} de xp')
-        xp += xp1
-        gp = random.randint(1, 25)
-        money += gp
-        mana -= 2
+        if mana <= 0:
+            print("¡No tienes suficiente maná para luchar! Usa una poción.")
+        else:
+            print(f'¡Encuentras un slime, lo matas y ganas {gp} monedas de oro y {xp1} de xp!')
+            xp += xp1
+            gp = random.randint(1, 25)
+            money += gp
+            mana -= 2
 
+    # Comando: HELP 1
     if cmd == 'help':
         print('===========================================================================')
-        print('1. inv: abre el inventario para ver tus objetos y oro disponible')
+        print('1. inv: Abre el inventario para ver tus objetos y el oro disponible.')
         print('===========================================================================')
-        print('2. pot: usa pociones en el inventario para regenerar mana tambien sirve fuera del inventario')
+        print('2. pot: Usa una poción de tu inventario para restaurar maná (funciona también fuera del inv).')
         print('===========================================================================')
-        print('3. frm: sirve para subir de nivel rapido pero da menos oro y gasta mas mana')
+        print('3. frm: Se usa para subir de nivel más rápido, pero da menos oro y cuesta más maná.')
         print('===========================================================================')
-        print('escribe help 2 para mas ayuda')
+        print('Escribe "help 2" para ver más comandos.')
 
-
+    # Comando: HELP 2
     if cmd == 'help 2':
         print('===================================================================================')
-        print('4. save: sirve para guardar partida, las partidas se guardan en .JSON puedes compartirlas si quieres!!')
+        print('4. save: Guarda tu partida actual. ¡Los guardados se almacenan en formato .JSON para que puedas compartirlos!')
         print('===================================================================================')
-        print('5. exit: como su nombre lo dice sirve para salir y ya(el comando guarda tu partida usalo)')
+        print('5. exit: Sale de la aplicación del juego (recuerda guardar tu progreso primero).')
         print('===================================================================================')
-        print('6. restart: borra tus datos util si quieres volver a empezar')
+        print('6. restart: Borra tus archivos de guardado, útil si quieres empezar de nuevo desde cero.')
         print('===================================================================================')
-        print('7. pm: sirve para saber cuanto mana tienes, si no estas peleando')
+        print('7. pm: Comprueba cuánto maná te queda mientras estás fuera del combate.')
 
-
+    # Comando: SRC (Código fuente)
     if cmd == 'src':
-        print('con el codigo fuente puedes crear mods o hacer lo que quieras :D')
-        print('Link = https://github.com/alleycraftyt-svg/ROG')
+        print('Con el código fuente, puedes crear mods o hacer lo que quieras :D')
+        print('Enlace = https://github.com')
 
-    # Comando: EXIT (Salir)
+    # Comando: EXIT
     if cmd == 'exit':
-        opcion = input('¿Quieres guardar antes de salir? (s/n): ').strip().lower()
-        if opcion == 's':
-            guardar_partida(name, xp, money, lv, xp1, mana, potion)
+        choice = input('¿Quieres guardar antes de salir? (s/n): ').strip().lower()
+        if choice == 's' or choice == 'y':
+            save_game(name, xp, money, lv, xp1, mana, potion)
         print('¡Gracias por jugar!')
         break
-
