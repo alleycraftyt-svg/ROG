@@ -155,14 +155,14 @@ while True:
             guardar_partida(name, xp, money, lv, xp1, mana, potion)
             print('¡Nueva partida iniciada!')
 
-    if cmd = 'frm':
+    if cmd == 'frm':
         print('encuentras un slime y lo matas y ganas {gp} y {xp1} de xp')
         xp += xp1
         gp = random.randint(1, 25)
         money += gp
         mana -= 2
 
-    if cmd = 'help':
+    if cmd == 'help':
         print('===========================================================================')
         print('1. inv: abre el inventario para ver tus objetos y oro disponible')
         print('===========================================================================')
@@ -173,7 +173,7 @@ while True:
         print('escribe help 2 para mas ayuda')
 
 
-    if cmd = 'help 2':
+    if cmd == 'help 2':
         print('===================================================================================')
         print('4. save: sirve para guardar partida, las partidas se guardan en .JSON puedes compartirlas si quieres!!')
         print('===================================================================================')
@@ -184,7 +184,7 @@ while True:
         print('7. pm: sirve para saber cuanto mana tienes, si no estas peleando')
 
 
-    if cmd = 'src':
+    if cmd == 'src':
         print('con el codigo fuente puedes crear mods o hacer lo que quieras :D')
         print('Link = https://github.com/alleycraftyt-svg/ROG')
 
