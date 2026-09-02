@@ -38,7 +38,7 @@ print('\nType "kill" to fight mobs, "xp" to see your status, "store" for the sho
 print('Use "help" to see additional commands.')
 print('--------------------------------------------------------')
 print()
-print(' Realm Of Gorthia (Demo 0.1.0) ')
+print(' Realm Of Gorthia (Demo 0.1.1) ')
 print()
 print('  BY: All3y_Sl4yer     ')
 print()
@@ -72,16 +72,17 @@ while True:
     # Command: STORE
     if cmd == 'store':
         print(f'Your current gold: {money}$')
-        print('A: Sword lv 10 (100$)')
+        print('A: x2 XP (500$)')
         print('B: Mana potion (20$)')
         print('C: Mana potion x10 (200$)')
         store = input('What are you going to buy? (A/B/C) or press ENTER to exit: ').strip().lower()
+        
 
     if store == 'a':
-        if money >= 100:
-            print('You bought the Sword! Now you gain more XP.')
-            money -= 100
-            xp1 = 20
+        if money >= 500:
+                print('You bought the x2 XP! Now you gain more XP.')
+                money -= 500
+                xp1 = 20
         else:
             print("You don't have enough money.")
 
@@ -106,6 +107,9 @@ while True:
         lv += 1
         xp = 0  
         print(f'Congratulations! You leveled up to level {lv}')
+        if lv == 100:
+            print('Congratulations!,  You are the first lv 100 of the game, Take this gold!!')
+            money += 5000
 
     # Command: INV (Inventory)
     if cmd == 'inv':
@@ -153,41 +157,40 @@ while True:
             print('New game started!')
 
     # Command: FRM (Farm)
-    if cmd == 'frm':
+    if cmd == 'pt':
         if mana <= 0:
             print("You don't have enough mana to fight! Use a potion.")
         else:
-            print(f'You find a slime, kill it, and earn {gp} gold and {xp1} xp!')
+            print(f'You find a slime and you kill it +{xp1} xp!')
             xp += xp1
-            gp = random.randint(1, 25)
-            money += gp
-            mana -= 2
+            mana -= 1
 
     # Command: HELP 1
     if cmd == 'help':
-        print('===========================================================================')
+        print('=====================================================================')
         print('1. inv: Opens the inventory to see your items and available gold.')
-        print('===========================================================================')
+        print('=====================================================================')
         print('2. pot: Uses a potion from your inventory to restore mana (works outside inv too).')
-        print('===========================================================================')
-        print('3. frm: Used to level up faster, but gives less gold and costs more mana.')
-        print('===========================================================================')
+        print('=====================================================================')
+        print('3. pt: Used to level up faster, costs more mana and you cant get gold.')
+        print('=====================================================================')
         print('Type "help 2" for more commands.')
 
     # Command: HELP 2
     if cmd == 'help 2':
-        print('===================================================================================')
+        print('=====================================================================')
         print('4. save: Saves your current game. Saves are stored in .JSON format so you can share them!')
-        print('===================================================================================')
+        print('=====================================================================')
         print('5. exit: Exits the game application (remember to save your progress first).')
-        print('===================================================================================')
+        print('=====================================================================')
         print('6. restart: Wipes your save files, useful if you want to start over from scratch.')
-        print('===================================================================================')
+        print('=====================================================================')
         print('7. pm: Checks how much mana you have left while outside of combat.')
 
     # Command: SRC (Source Code)
     if cmd == 'src':
         print('With the source code, you can create mods or do whatever you want :D')
+        print()
         print('Link = https://github.com/alleycraftyt-svg/ROG')
 
     # Command: EXIT
@@ -197,5 +200,8 @@ while True:
             save_game(name, xp, money, lv, xp1, mana, potion)
         print('Thanks for playing!')
         break
+
+
+
 
 
