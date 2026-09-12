@@ -40,13 +40,10 @@ git clone https://github.com/alleycraftyt-svg/ROG
 ---
 
 ### 3. Run the Game
-Enter the newly created folder and launch the game with this final command(theres to versions the esp and eng edition):
+Enter the newly created folder and launch the game with this final command:
 
 ```bash
-cd ROG && python3 ¨ROG(ESP).py¨
-```
-```bash
-cd ROG && python3 ROG.py
+cd ROG && python3 rog.py
 ```
 
 
