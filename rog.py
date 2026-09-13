@@ -78,7 +78,7 @@ while True:
         print(f'Your current gold: {money} GP')
         print('A: Mana potion x1   (20 GP)')
         print('B: Mana potion x10  (200 GP)')
-        print('C: Chocolate Cake   (10 GP)')
+        print('C: Chocolate Cake   (5 GP)')
         print('D: Mana Rune        (1000 GP)')
         store = input('What are you going to buy? (A/B/C) or press ENTER to exit: ').strip().lower()
 
@@ -100,9 +100,9 @@ while True:
 
         elif store == 'c':
             if money >= 10: 
-                print('You bought a cake and you eat them,(hmmmm chocolate) +5 mana!')
-                money -= 10
-                mana += 5
+                print('You bought a cake and you eat them,(hmmmm chocolate) +1 mana!')
+                money -= 5
+                mana += 1
             else:
                 print("You don't have enough money.")
 
