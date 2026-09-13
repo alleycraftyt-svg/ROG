@@ -34,7 +34,7 @@ pkg update && pkg install git python -y
 Copy this command to clone the complete game repository to your device:
 
 ```bash
-git clone https://github.com/alleycraftyt-svg/ROG
+git clone https://github.com/alleycraftyt-svg/realm-of-gorthia
 ```
 
 ---
@@ -43,7 +43,7 @@ git clone https://github.com/alleycraftyt-svg/ROG
 Enter the newly created folder and launch the game with this final command:
 
 ```bash
-cd ROG && python3 rog.py
+cd realm-of-gorthia && python3 rog.py
 ```
 
 
