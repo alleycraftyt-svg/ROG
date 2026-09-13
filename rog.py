@@ -267,9 +267,10 @@ while True:
             print("You don't have enough mana to fight! Use a potion.")
         else:
             print('you start training your spells...')
+            time.sleep(1)
             mana -= 10
+            print('training...')
             for i in range(60):
-                print(f'you gain +40 xp!')
-                print(f'...')
                 xp += 40
                 time.sleep(1)
+            print('you trained for 1 minute and you gained 2400 of xp!!!')
